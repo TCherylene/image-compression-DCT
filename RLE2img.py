@@ -2,43 +2,40 @@ import cv2
 import numpy as np
 import math
 
-# import zigzag functions
+# Import fungsi zigzag
 from zigzag import *
 
 QUANTIZATION_MAT = np.array([[16,11,10,16,24,40,51,61],[12,12,14,19,26,58,60,55],[14,13,16,24,40,57,69,56 ],[14,17,22,29,51,87,80,62],[18,22,37,56,68,109,103,77],[24,35,55,64,81,104,113,92],[49,64,78,87,103,121,120,101],[72,92,95,98,112,100,103,99]])
 
-# defining block size
+# Menentukan ukuran blok
 block_size = 8
 
-# Reading image.txt to decode it as image
+# Membaca image.txt ke decode 
 with open('image.txt', 'r') as myfile:
-    image=myfile.read()
+    image=myfile.read() 
 
-# spplits into tokens seperated by space characters
 details = image.split()
 
-# just python-crap to get integer from tokens : h and w are height and width of image (first two items)
+# Mendapatkan integer dari h dan w
 h = int(''.join(filter(str.isdigit, details[0])))
 w = int(''.join(filter(str.isdigit, details[1])))
 
-# declare an array of zeros (It helps to reconstruct bigger array on which IDCT and all has to be applied)
+# Deklarasi array 
 array = np.zeros(h*w).astype(int)
 
 
-# some loop var initialisation
+# Melakukan loop 
 k = 0
 i = 2
 x = 0
 j = 0
 
 
-# This loop gives us reconstructed array of size of image
+# Loop memberikan susunan gambar 
 
 while k < array.shape[0]:
-# Oh! image has ended
     if(details[i] == ';'):
         break
-# This is imp! note that to get negative numbers in array check for - sign in string
     if "-" not in details[i]:
         array[k] = int(''.join(filter(str.isdigit, details[i])))        
     else:
@@ -56,12 +53,12 @@ while k < array.shape[0]:
 
 array = np.reshape(array,(h,w))
 
-# loop for constructing intensity matrix form frequency matrix (IDCT and all)
+# Membangun matriks
 i = 0
 j = 0
 k = 0
 
-# initialisation of compressed image
+# Menginisialisasi gambar yang dikompres
 padded_img = np.zeros((h,w))
 
 while i < h:
@@ -74,11 +71,9 @@ while i < h:
         j = j + 8        
     i = i + 8
 
-# clamping to  8-bit max-min values
+# Mengapi ke nilai maksimal ke minimal 8 bit 
 padded_img[padded_img > 255] = 255
 padded_img[padded_img < 0] = 0
 
-# compressed image is written into compressed_image.mp file
+# Mengkompres gambar dari compressed_image.mp file
 cv2.imwrite("compressed_image.png",np.uint8(padded_img))
-
-# DONE!
