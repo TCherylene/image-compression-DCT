@@ -32,7 +32,6 @@ j = 0
 
 
 # Loop memberikan susunan gambar 
-
 while k < array.shape[0]:
     if(details[i] == ';'):
         break
@@ -71,7 +70,7 @@ while i < h:
         j = j + 8        
     i = i + 8
 
-# Mengapi ke nilai maksimal ke minimal 8 bit 
+# Menggapai ke nilai maksimal ke minimal 8 bit 
 padded_img[padded_img > 255] = 255
 padded_img[padded_img < 0] = 0
 

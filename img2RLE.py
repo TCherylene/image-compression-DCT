@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import math
 
-# import zigzag functions
 from zigzag import *
 
 
@@ -29,22 +28,13 @@ block_size = 8
 # Quantization Matriks 
 QUANTIZATION_MAT = np.array([[16,11,10,16,24,40,51,61],[12,12,14,19,26,58,60,55],[14,13,16,24,40,57,69,56 ],[14,17,22,29,51,87,80,62],[18,22,37,56,68,109,103,77],[24,35,55,64,81,104,113,92],[49,64,78,87,103,121,120,101],[72,92,95,98,112,100,103,99]])
 
-# reading image in grayscale style
 # Membaca gambar dalam grayscale style
 img = cv2.imread('lena.png', cv2.IMREAD_GRAYSCALE)
 
-#You can try with this matrix to understand working of DCT
-# Memahami cara kerja DCT 
-#img = np.array([[255,255,227,204,204,203,192,217],[215,189,167,166,160,135,167,244],[169,115,99,99,99,82,127,220],[146,90,86,88,84,63,195,189],[255,255,231,239,240,182,251,232],[255,255,21,245,226,169,229,247],[255,255,222,251,174,209,174,163],[255,255,221,184,205,248,249,220]])
-
-
-# get size of the image
 # Mendapat ukuran dari gambar
 [h , w] = img.shape
 
-# No of blocks needed : Calculation
 # Jumlah blok yang dibutuhkan : Perhitungan 
-
 height = h
 width = w
 h = np.float32(h) 

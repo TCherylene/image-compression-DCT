@@ -1,15 +1,3 @@
-# Zigzag scan of a matrix
-# Argument is a two-dimensional matrix of any size,
-# not strictly a square one.
-# Function returns a 1-by-(m*n) array,
-# where m and n are sizes of an input matrix,
-# consisting of its items scanned by a zigzag method.
-#
-# Matlab Code:
-# Alexey S. Sokolov a.k.a. nICKEL, Moscow, Russia
-# June 2007
-# alex.nickel@gmail.com
-
 import numpy as np
 
 def zigzag(input):
